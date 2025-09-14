@@ -1,0 +1,15 @@
+{
+  "input": {
+    "text": "영업시간은 평일 9시부터 16시입니다."
+  },
+  "response": {
+    "answer": "영업시간은 평일 9시부터 16시입니다.",
+    "pii_score": 0,
+    "blocked": false,
+    "matches": []
+  },
+  "validation": {
+    "pii_score_zero": true,
+    "matches_empty": true
+  }
+}

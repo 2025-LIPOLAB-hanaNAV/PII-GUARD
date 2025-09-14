@@ -1,0 +1,22 @@
+{
+  "input": {
+    "text": "홍길동의 계좌번호 123-456-7890123 로 이체"
+  },
+  "response": {
+    "scrubbed": "홍길동의 계좌번호 <ACCOUNT> 로 이체",
+    "matches": [
+      {
+        "type": "ACCOUNT",
+        "value": "123-456-7890123",
+        "span": [
+          10,
+          25
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "has_account": true,
+    "has_account_mask": true
+  }
+}

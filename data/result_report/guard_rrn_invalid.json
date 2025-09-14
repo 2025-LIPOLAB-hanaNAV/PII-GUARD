@@ -1,0 +1,15 @@
+{
+  "input": {
+    "text": "871301-1234567"
+  },
+  "response": {
+    "answer": "871301-1234567",
+    "pii_score": 0,
+    "blocked": false,
+    "matches": []
+  },
+  "validation": {
+    "rrn_not_detected": true,
+    "low_score": true
+  }
+}

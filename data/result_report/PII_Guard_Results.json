@@ -1,0 +1,49 @@
+{
+  "pdf_path": "C:\\Users\\a3566\\OneDrive\\바탕 화면\\서폴더\\리포랩\\hana navi_pii\\data\\pdf_merged.pdf",
+  "report_dir": "C:\\Users\\a3566\\OneDrive\\바탕 화면\\서폴더\\리포랩\\hana navi_pii\\data\\result_report",
+  "timestamp": "2025-09-14T23:33:50.084413",
+  "tests": [
+    {
+      "name": "T1_guard_before",
+      "score": 49,
+      "types": [
+        "PHONE",
+        "EMAIL",
+        "CARD"
+      ],
+      "blocked": false,
+      "file": "guard1_before_whitelist.json",
+      "status": "PASS"
+    },
+    {
+      "name": "T2_ingest_scrub",
+      "types_detected": [
+        "ACCOUNT"
+      ],
+      "file": "scrub1.json",
+      "status": "PASS"
+    },
+    {
+      "name": "T3_pdf_demo",
+      "status": "FAIL",
+      "error": "PDF 데모 실행 실패: "
+    },
+    {
+      "name": "T4_guard_safe",
+      "score": 0,
+      "file": "guard_safe.json",
+      "status": "PASS"
+    },
+    {
+      "name": "T5_guard_rrn_invalid",
+      "score": 0,
+      "file": "guard_rrn_invalid.json",
+      "status": "PASS"
+    },
+    {
+      "name": "T6_guard_after_whitelist",
+      "status": "FAIL",
+      "error": "Server restart failed"
+    }
+  ]
+}

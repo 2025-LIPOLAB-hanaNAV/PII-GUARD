@@ -1,0 +1,45 @@
+{
+  "input": {
+    "text": "문의는 010-9999-8888 또는 help@bank.com 입니다. 카드 4111 1111 1111 1111"
+  },
+  "response": {
+    "answer": "문의는 <PHONE> 또는 <EMAIL> 입니다. 카드<CARD>",
+    "pii_score": 49,
+    "blocked": false,
+    "matches": [
+      {
+        "type": "PHONE",
+        "value": "010-9999-8888",
+        "span": [
+          4,
+          17
+        ]
+      },
+      {
+        "type": "EMAIL",
+        "value": "help@bank.com",
+        "span": [
+          21,
+          34
+        ]
+      },
+      {
+        "type": "CARD",
+        "value": "4111 1111 1111 1111",
+        "span": [
+          42,
+          62
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "pii_score_positive": true,
+    "has_phone": true,
+    "has_email": true,
+    "has_card": true,
+    "has_phone_mask": true,
+    "has_email_mask": true,
+    "has_card_mask": true
+  }
+}
