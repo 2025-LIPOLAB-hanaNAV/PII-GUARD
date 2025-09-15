@@ -187,7 +187,6 @@ async def redirect_to_docs():
     """루트 경로를 Swagger 문서로 리다이렉트"""
     return RedirectResponse(url="/docs")
 
-<<<<<<< HEAD
 @app.get("/info",
          summary="API 정보",
          description="PII Guard API의 기본 정보와 설정을 반환합니다.",
