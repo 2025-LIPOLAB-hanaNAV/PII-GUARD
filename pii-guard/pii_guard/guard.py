@@ -16,7 +16,8 @@ def guard_answer(text: str, detector: PIIDetector = None) -> Dict[str, Any]:
             "answer": 마스킹된 답변 또는 차단 메시지,
             "pii_score": 위험도 점수(0-100),
             "blocked": 차단 여부,
-            "matches": PII 매치 정보 리스트
+            "matches": PII 매치 정보 리스트,
+            "prompt_injection": 프롬프트 인젝션 탐지 결과
         }
     """
     if detector is None:
@@ -25,15 +26,21 @@ def guard_answer(text: str, detector: PIIDetector = None) -> Dict[str, Any]:
     # PII 탐지
     matches = detector.detect_pii(text)
 
+    # 프롬프트 인젝션 탐지
+    injection_result = detector.detect_prompt_injection(text)
+
     # 위험도 점수 계산
     pii_score = detector.calculate_risk_score(matches)
 
-    # 차단 여부 결정 (70점 이상)
-    blocked = pii_score >= 70
+    # 차단 여부 결정 (PII 70점 이상 또는 프롬프트 인젝션 탐지)
+    blocked = pii_score >= 70 or injection_result.get("injection_detected", False)
 
     if blocked:
         # 차단된 경우
-        answer = "죄송합니다. 개인정보가 포함된 내용으로 인해 응답을 제공할 수 없습니다."
+        if injection_result.get("injection_detected", False):
+            answer = "악의적인 프롬프트 인젝션이 탐지되어 응답을 제공할 수 없습니다."
+        else:
+            answer = "죄송합니다. 개인정보가 포함된 내용으로 인해 응답을 제공할 수 없습니다."
     else:
         # 마스킹 처리
         answer = detector.mask_pii(text, matches)
@@ -42,7 +49,8 @@ def guard_answer(text: str, detector: PIIDetector = None) -> Dict[str, Any]:
         "answer": answer,
         "pii_score": pii_score,
         "blocked": blocked,
-        "matches": [match.to_dict() for match in matches]
+        "matches": [match.to_dict() for match in matches],
+        "prompt_injection": injection_result
     }
 
 
