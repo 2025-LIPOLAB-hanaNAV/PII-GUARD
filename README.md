@@ -103,7 +103,7 @@ pip install -r requirements.txt
 
 ```bash
 # 개발 서버 실행 (포트 8787)
-uvicorn pii_guard.api:app --reload --port 8787
+uvicorn pii_guard.api:app --reload --port 3000
 
 # 또는 직접 실행
 python -m pii_guard.api
