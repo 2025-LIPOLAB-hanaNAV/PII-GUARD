@@ -295,10 +295,6 @@ class PIIDetector:
                     start = match.start()
                     end = match.end()
 
-                # 일반적인 단어 필터링
-                if not self._is_common_word(value):
-                    matches.append(PIIMatch('NAME', value, start, end,
-                                          confidence=0.8, source="regex"))
 
     def _detect_addresses_regex(self, text: str, matches: List[PIIMatch]):
         """주소 RegEx 탐지"""
@@ -315,23 +311,6 @@ class PIIDetector:
                 value = match.group()
                 matches.append(PIIMatch('ID_NUMBER', value, match.start(), match.end(),
                                       confidence=0.6, source="regex"))
-
-    def _is_common_word(self, word: str) -> bool:
-        """일반적인 단어인지 체크 (이름이 아닌 것들 필터링)"""
-        common_words = {
-            # 지시어, 의문사
-            '이것', '그것', '저것', '여기', '거기', '저기', '이제', '그제', '저제',
-            '어떻게', '어디서', '언제', '누구', '무엇', '왜', '어느', '얼마나',
-            # 인사말, 감정 표현
-            '안녕', '감사', '죄송', '미안', '괜찮', '좋아', '싫어', '고마워',
-            # 일반 명사
-            '사람', '여자', '남자', '아이', '어른', '학생', '선생', '친구',
-            # 동사 활용
-            '만들어', '가지고', '하지만', '그런데', '하지만', '그래서', '그리고',
-            # 기타 일반 단어
-            '모든', '모두', '전부', '하나', '전체', '부분', '조금', '많이'
-        }
-        return word in common_words
 
     def _detect_pii_llm(self, text: str) -> List[PIIMatch]:
         """LLM 기반 PII 탐지"""
