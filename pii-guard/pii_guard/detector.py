@@ -98,6 +98,7 @@ class PIIDetector:
             'NAME': [
                 # 한국 이름 패턴 - 이름 맥락에서만 탐지
                 r'(?:이름은?|성명은?|성함은?|이름이)\s*([김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허유남심노하곽성차주우구원태선설마길연방명기반왕금옥육인맹제갈선우남궁독고황보제][가-힣]{1,2})',
+                r'(?:이름|성명|성함)[:：]\s*([김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허유남심노하곽성차주우구원태선설마길연방명기반왕금옥육인맹제갈선우남궁독고황보제][가-힣]{1,2})',
                 r'([김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허유남심노하곽성차주우구원태선설마길연방명기반왕금옥육인맹제갈선우남궁독고황보제][가-힣]{1,2})(?:님|씨|선생|군|양|학생|고객|손님)',
                 # 영어 이름 패턴 (First Last)
                 r'\b[A-Z][a-z]+\s+[A-Z][a-z]+\b'
@@ -294,6 +295,9 @@ class PIIDetector:
                     value = match.group()
                     start = match.start()
                     end = match.end()
+
+                # 매치를 리스트에 추가
+                matches.append(PIIMatch('NAME', value, start, end, confidence=0.75, source="regex"))
 
 
     def _detect_addresses_regex(self, text: str, matches: List[PIIMatch]):
