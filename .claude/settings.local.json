@@ -3,7 +3,12 @@
     "allow": [
       "Bash(python:*)",
       "Bash(taskkill:*)",
-      "Bash(netstat:*)"
+      "Bash(netstat:*)",
+      "Read(//c/Users/user/Desktop/**)",
+      "Bash(docker exec:*)",
+      "Bash(docker-compose down:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker logs:*)"
     ],
     "deny": [],
     "ask": []
